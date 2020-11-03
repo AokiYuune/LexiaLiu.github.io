@@ -36,4 +36,4 @@ SET_TARGET_PROPERTIES(Math PROPERTIES LINKER_LANGUAGE C) #设置linker
 在根目录Debug下生成了Math.dll
 
 ## 3.使用CMake创建使用dll库的exe项目
-
+![_config.yml]({{ site.baseurl }}/images/HelloCMake.PNG)
