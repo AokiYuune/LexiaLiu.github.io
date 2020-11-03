@@ -1,3 +1,8 @@
 # CMake入门笔记
 
-## 环境
+## 运行环境
+win10
+cmake version 3.19.0-rc2
+virtual studio 2019
+
+## 1.使用CMake创建exe文件HelloWorld项目
