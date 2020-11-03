@@ -79,7 +79,7 @@ set()命令有两种用法，一种是设置自己需要的简写别名，另一
 
 //此处为井号注释符target_link_libraries(HelloWorld D:/exercise/CMake_last/lib/debug/add_lib_static.lib) #链接lib库
 
-###运行CMake并编译后
+### 运行CMake并编译后
 在PROJECT_SOURCE_DIR/bin/Debug下生成了exe和dll文件，exe正确运行，在VS中为调用函数加断点可以看到Loaded 'D:\exercise\CMake_last\bin\Debug\add_lib_shared.dll'. Symbols loaded.
 
 ## 几处小坑
