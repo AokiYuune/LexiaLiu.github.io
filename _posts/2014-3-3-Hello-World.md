@@ -11,11 +11,11 @@ virtual studio 2019
 
 ### CMakeLists.txt文件内容
 
-cmake_minimum_required (VERSION 3.1) #指定需求的最低CMake版本
+**cmake_minimum_required (VERSION 3.1)** #指定需求的最低CMake版本
 
-project (HelloWorld) #project命名
+**project (HelloWorld)** #project命名
 
-add_executable (HelloWorld HelloWorld.cpp)  #使用HelloWorld.cpp创建名为HelloWorld的exe项目
+**add_executable (HelloWorld HelloWorld.cpp)**  #使用HelloWorld.cpp创建名为HelloWorld的exe项目
 
 ### 运行效果
 在根目录下生成了HelloWorld项目文件，使用vs编译后成功生成HelloWorld.exe
@@ -25,13 +25,13 @@ add_executable (HelloWorld HelloWorld.cpp)  #使用HelloWorld.cpp创建名为Hel
 在根目录下应该包含XXX.h、XXX.cpp和CMakeLists.txt，在XXX.h需要用到的函数类型后加__declspec(dllexport)标明需要将其包含在dll库中
 
 ### CMakeLists.txt文件内容
-set(LIBMATH_SRC MathFunctions.cpp) # 设置简写名
+**set(LIBMATH_SRC MathFunctions.cpp)** # 设置简写名
 
-add_library(Math SHARED ${LIBMATH_SRC}) #添加动态库
+**add_library(Math SHARED ${LIBMATH_SRC})** #添加动态库
 
-install(TARGETS Math RUNTIME DESTINATION D:/exercise/cmake_dll/lib) #安装动态库
+**install(TARGETS Math RUNTIME DESTINATION D:/exercise/cmake_dll/lib)** #安装动态库
 
-SET_TARGET_PROPERTIES(Math PROPERTIES LINKER_LANGUAGE C) #设置linker
+**SET_TARGET_PROPERTIES(Math PROPERTIES LINKER_LANGUAGE C)** #设置linker
 ### 运行效果
 在根目录Debug下生成了Math.dll
 
@@ -41,39 +41,39 @@ SET_TARGET_PROPERTIES(Math PROPERTIES LINKER_LANGUAGE C) #设置linker
 
 使用add_subdirectory(目录名)可以添加子项目，同时子项目的CMakeLists.txt会被执行
 ### 子项目CMakeLists.txt
-set(BUILD_USE_64BITS on) #64位编程
+**set(BUILD_USE_64BITS on)**  #64位编程
 
-set(LIBPARSER_DLL parser.cpp)#.cpp文件别名
+**set(LIBPARSER_DLL parser.cpp)**  #.cpp文件别名
 
-add_library(add_lib_shared SHARED ${LIBPARSER_DLL}) #生成动态库
+**add_library(add_lib_shared SHARED ${LIBPARSER_DLL})**   #生成动态库
 
-//此处为井号注释符add_library(add_lib_static STATIC ${LIBPARSER_DLL}) //lib文件生成方法
+//此处为井号注释符add_library(add_lib_static STATIC ${LIBPARSER_DLL})   //lib文件生成方法
 
-//此处为井号注释符INSTALL(TARGETS add_lib_shared RUNTIME DESTINATION D:/exercise/CMake_last/lib) #安装目标文件
+//此处为井号注释符INSTALL(TARGETS add_lib_shared RUNTIME DESTINATION D:/exercise/CMake_last/lib)   #安装目标文件
 
-set_target_properties(add_lib_shared PROPERTIES LINKER_LANGUAGE C) #设置linker
+**set_target_properties(add_lib_shared PROPERTIES LINKER_LANGUAGE C)**   #设置linker
 
 ### 主项目CMakeLists.txt
 cmake_minimum_required(VERSION 3.10)
 
 project (HelloWorld)#项目名称
 
-set(PROJECT_SOURCE_DIR D:/exercise/CMake_last) #设置项目目录别名
+**set(PROJECT_SOURCE_DIR D:/exercise/CMake_last)**   #设置项目目录别名
 set()命令有两种用法，一种是设置自己需要的简写别名，另一种是设定设置关键字。这里用到的关键字有LIBRARY_OUTPUT_PATH、EXECUTABLE_OUTPUT_PATH等
 
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #库文件输出目录//不设置默认在库文件所在目录输出
+**set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)**   #库文件输出目录//不设置默认在库文件所在目录输出
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #设置执行文件输出目录//不设置默认在根目录输出
+**set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)**   #设置执行文件输出目录//不设置默认在根目录输出
 
-//set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin") #设置库文件输出目录的一种形式，CMAKE_RUNTIME_OUTPUT_DIRECTORY是关键字
+//set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")  #设置库文件输出目录的一种形式，CMAKE_RUNTIME_OUTPUT_DIRECTORY是关键字
 
-add_subdirectory(HelloPrint)#添加子目录
+**add_subdirectory(HelloPrint)** #添加子目录
 
-add_executable (HelloWorld main.cpp) #添加exe
+**add_executable (HelloWorld main.cpp)** #添加exe
 
-target_link_libraries( HelloWorld 
+**target_link_libraries( HelloWorld 
 						PRIVATE
-							add_lib_shared) #链接dll库，链接方式有private和public，private仅供当前链接项目使用，public可以供主项目下所有项目使用
+							add_lib_shared)** #链接dll库，链接方式有private和public，private仅供当前链接项目使用，public可以供主项目下所有项目使用
 
 //此处为井号注释符set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "AssetConverter")
 
