@@ -37,3 +37,52 @@ SET_TARGET_PROPERTIES(Math PROPERTIES LINKER_LANGUAGE C) #设置linker
 
 ## 3.使用CMake创建使用dll库的exe项目
 ![_config.yml]({{ site.baseurl }}/images/HelloCMake.PNG)
+根据图示结构创建项目
+
+使用add_subdirectory(目录名)可以添加子项目，同时子项目的CMakeLists.txt会被执行
+### 子项目CMakeLists.txt
+set(BUILD_USE_64BITS on) #64位编程
+
+set(LIBPARSER_DLL parser.cpp)#.cpp文件别名
+
+add_library(add_lib_shared SHARED ${LIBPARSER_DLL}) #生成动态库
+
+//此处为井号注释符add_library(add_lib_static STATIC ${LIBPARSER_DLL}) //lib文件生成方法
+
+//此处为井号注释符INSTALL(TARGETS add_lib_shared RUNTIME DESTINATION D:/exercise/CMake_last/lib) #安装目标文件
+
+set_target_properties(add_lib_shared PROPERTIES LINKER_LANGUAGE C) #设置linker
+
+### 主项目CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)
+
+project (HelloWorld)#项目名称
+
+set(PROJECT_SOURCE_DIR D:/exercise/CMake_last) #设置项目目录别名
+set()命令有两种用法，一种是设置自己需要的简写别名，另一种是设定设置关键字。这里用到的关键字有LIBRARY_OUTPUT_PATH、EXECUTABLE_OUTPUT_PATH等
+
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #库文件输出目录//不设置默认在库文件所在目录输出
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #设置执行文件输出目录//不设置默认在根目录输出
+
+//set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin") #设置库文件输出目录的一种形式，CMAKE_RUNTIME_OUTPUT_DIRECTORY是关键字
+
+add_subdirectory(HelloPrint)#添加子目录
+
+add_executable (HelloWorld main.cpp) #添加exe
+
+target_link_libraries( HelloWorld 
+						PRIVATE
+							add_lib_shared) #链接dll库，链接方式有private和public，private仅供当前链接项目使用，public可以供主项目下所有项目使用
+
+//此处为井号注释符set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "AssetConverter")
+
+//此处为井号注释符target_link_libraries(HelloWorld D:/exercise/CMake_last/lib/debug/add_lib_static.lib) #链接lib库
+
+###运行CMake并编译后
+在PROJECT_SOURCE_DIR/bin/Debug下生成了exe和dll文件，exe正确运行，在VS中为调用函数加断点可以看到Loaded 'D:\exercise\CMake_last\bin\Debug\add_lib_shared.dll'. Symbols loaded.
+
+## 几处小坑
+主项目和子项目默认输出位置不一致，需要自己设置将dll和exe输出到同一文件夹下。
+set命令的两种用法，辨别关键字
+虽然运行时不需要lib，但是编译时需要lib文件，需要一并生成
