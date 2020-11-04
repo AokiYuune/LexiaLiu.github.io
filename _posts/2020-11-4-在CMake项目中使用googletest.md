@@ -7,7 +7,7 @@ googletest是谷歌开源的实用单元测试框架。
 &emsp;
 &emsp;
 ### CMakeLists编写方法
-#### 1.根目录CMakeLists.txt
+### 1.根目录CMakeLists.txt
 cmake_minimum_required(VERSION 3.10)
 
 project (HelloGTest)
@@ -30,7 +30,7 @@ set(PROJECT_SOURCE_DIR D:/exercise/gtest)
 **&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; PRIVATE  **
 **&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; boolExpr) **
 
-#### 2.boolExpr下的CMakeLists.txt
+### 2.boolExpr下的CMakeLists.txt
 
 set(BUILD_USE_64BITS on) #64位编程
 
@@ -44,7 +44,7 @@ set_target_properties(boolExpr PROPERTIES LINKER_LANGUAGE C)
 
 **与前文dll库项目相同**
 
-#### 3.boolExprTest下的CMakeLists.txt
+### 3.boolExprTest下的CMakeLists.txt
 project(boolExprTest)
 
 **set(EXTERNALPATH ${CMAKE_CURRENT_SOURCE_DIR}../external)** #为外部库路径起别名
@@ -57,17 +57,35 @@ project(boolExprTest)
 **target_link_libraries(boolExprTest boolExpr gmock gtest)**
 
 **target_include_directories(
-  boolExpr
-  PRIVATE${EXTERNALPATH}/googletest/googletest/include
-&emsp;&emsp;&emsp;&emsp;&emsp;${EXTERNALPATH}/googletest/googlemock/include
-&emsp;&emsp;&emsp;&emsp;&emsp;${BOOL_EXPR_ROOT})** #将googletest的头文件和待测试头文件include进来
+&emsp;boolExpr
+&emsp;PRIVATE &nbsp; ${EXTERNALPATH}/googletest/googletest/include
+&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; &nbsp; ${EXTERNALPATH}/googletest/googlemock/include
+&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; &nbsp; ${BOOL_EXPR_ROOT})** #将googletest的头文件和待测试头文件include进来
 
 **target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)** 指定编译c++版本
 
-#### 在根目录运行cmake .，就可以成功创建所需要的项目。
+### 在根目录运行cmake .，就可以成功创建所需要的项目。
+编译结果：
+![_config.yml]({{ site.baseurl }}/images/TESTEXE.PNG)
 &emsp;
 &emsp;
 ### 二.编写XXXtest.cpp
 
 在googletest中，比较常用的测试宏是TEST、TEST_F、TEST_P，较常用的断言是EXPECT和ASSERT
-TEST宏用法
+
+### TEST宏
+TEST宏用法：**TEST(待测试函数名，测试名){测试内容}**&nbsp; &nbsp;测试名可以自拟，最好起名与测试内容相关
+EXPECT断言在遇到失败测试之后会继续将所有测试用例运行完，ASSERT断言在测试失败后会退出、一般用于较关键功能的测试。
+示例：
+![_config.yml]({{ site.baseurl }}/images/TEST.PNG)
+运行效果：
+![_config.yml]({{ site.baseurl }}/images/TESTEXERUN.PNG) 这里非运算函数故意写错了，也在测试中有反馈
+
+### TEST_F宏
+TEST_F宏用于将同一个测试用例应用于多个测试。
+在使用TEST_F时，必须先声明一个类，显式继承自待测试类和testing::Test类，并在其中声明SetUpTestCase()方法（在第一个TEST_F前执行，用于构造类）和TearDownTestCase()方法（在最后一个TEST后执行，用于析构）。
+示例代码：
+![_config.yml]({{ site.baseurl }}/images/TEST_F.PNG)
+
+### TEST_P宏
+//TODO NYL
