@@ -85,6 +85,7 @@ EXPECT断言在遇到失败测试之后会继续将所有测试用例运行完�
 ### TEST_F宏
 TEST_F宏用于将同一个测试用例应用于多个测试。
 在使用TEST_F时，必须先声明一个类，显式继承自待测试类和testing::Test类，并在其中声明SetUpTestCase()方法（在第一个TEST_F前执行，用于构造类）和TearDownTestCase()方法（在最后一个TEST后执行，用于析构）。
+
 示例代码：
 ![_config.yml]({{ site.baseurl }}/images/TEST_F.png)
 
