@@ -66,7 +66,7 @@ project(boolExprTest)
 
 ### 在根目录运行cmake .，就可以成功创建所需要的项目。
 编译结果：
-![_config.yml]({{ site.baseurl }}/images/TESTEXE.PNG)
+![_config.yml]({{ site.baseurl }}/images/TESTEXE.png)
 &emsp;
 &emsp;
 ### 二.编写XXXtest.cpp
@@ -78,14 +78,15 @@ TEST宏用法：**TEST(待测试函数名，测试名){测试内容}**&nbsp; &nb
 EXPECT断言在遇到失败测试之后会继续将所有测试用例运行完，ASSERT断言在测试失败后会退出、一般用于较关键功能的测试。
 示例：
 ![_config.yml]({{ site.baseurl }}/images/TEST.PNG)
+
 运行效果：
-![_config.yml]({{ site.baseurl }}/images/TESTEXERUN.PNG) 这里非运算函数故意写错了，也在测试中有反馈
+![_config.yml]({{ site.baseurl }}/images/TESTEXERUN.png) 这里非运算函数故意写错了，也在测试中有反馈
 
 ### TEST_F宏
 TEST_F宏用于将同一个测试用例应用于多个测试。
 在使用TEST_F时，必须先声明一个类，显式继承自待测试类和testing::Test类，并在其中声明SetUpTestCase()方法（在第一个TEST_F前执行，用于构造类）和TearDownTestCase()方法（在最后一个TEST后执行，用于析构）。
 示例代码：
-![_config.yml]({{ site.baseurl }}/images/TEST_F.PNG)
+![_config.yml]({{ site.baseurl }}/images/TEST_F.png)
 
 ### TEST_P宏
-//TODO NYL
+//TODO 
