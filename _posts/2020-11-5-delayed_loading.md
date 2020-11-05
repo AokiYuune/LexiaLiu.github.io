@@ -7,4 +7,9 @@
 
 该函数返回一个句柄，表示加载的库。如果不指定绝对路径，会从生成目标文件夹寻找库文件。
 
-### LoadLibrary(路径字符串)
+**FARPROC GetProcAddress(
+    HMODULE   hModule,    // DLL模块句柄
+    LPCSTR       lpProcName   // 函数名
+);**
+
+该函数使用两个参数：句柄和字符串，并返回一个F
