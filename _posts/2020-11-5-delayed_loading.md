@@ -1,7 +1,7 @@
 延迟加载是指通过代码声明，在exe开始运行时不加载dll库，需要用到库中函数时再加载dll库。
 
 ## 关键函数
-** HMODULE LoadLibraryA(
+**HMODULE LoadLibraryA(
   LPCSTR lpLibFileName
 );**
 
